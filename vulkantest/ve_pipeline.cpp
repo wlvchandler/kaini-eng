@@ -73,6 +73,21 @@ namespace ke {
 		configInfo.viewportInfo.scissorCount = 1;
 		configInfo.viewportInfo.pScissors = &configInfo.scissor;
 
+		// State 2) Rasterization -- break up geometry into fragments for where each pixel the triangle overlaps
+		//https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPipelineRasterizationStateCreateInfo.html
+		configInfo.rasterInfo.sType = VK_STRUCTURE_TYPE_PIPELINE_RASTERIZATION_STATE_CREATE_INFO;
+		configInfo.rasterInfo.depthClampEnable = VK_FALSE;			// do not clep fragment's depth values (https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#fragops-depth)
+		configInfo.rasterInfo.rasterizerDiscardEnable = VK_FALSE;	// do not discard primitives immediately before rasterization
+		configInfo.rasterInfo.polygonMode = VK_POLYGON_MODE_FILL;   // render polygons using rasterization rules here
+		configInfo.rasterInfo.lineWidth = 1.0f;
+		configInfo.rasterInfo.cullMode = VK_CULL_MODE_NONE;			// do not discard any triangles...yet (BACK_BIT for backface culling)
+		configInfo.rasterInfo.frontFace = VK_FRONT_FACE_CLOCKWISE;  // triangle with negative area is considered front-facing
+		configInfo.rasterInfo.depthBiasEnable = VK_FALSE;
+		configInfo.rasterInfo.depthBiasConstantFactor = 0.0f;
+		configInfo.rasterInfo.depthBiasClamp = 0.0f;
+		configInfo.rasterInfo.depthBiasSlopeFactor = 0.0f;
+
+
 
 		return configInfo;
 	}
