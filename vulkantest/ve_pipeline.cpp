@@ -6,7 +6,7 @@
 
 namespace ke {
 
-	ve_pipeline::ve_pipeline(const std::string& fd_vert, const std::string& fd_frag) {
+	ve_pipeline::ve_pipeline(const ve_device& device, const pipeline_config& conf, const std::string& fd_vert, const std::string& fd_frag) {
 		this->createGraphicsPipeline(fd_vert, fd_frag);
 	}
 

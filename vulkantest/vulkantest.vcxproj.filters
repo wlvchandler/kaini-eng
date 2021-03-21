@@ -27,10 +27,10 @@
     <ClCompile Include="ve_pipeline.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ve_engine_device.cpp">
+    <ClCompile Include="ve_window.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ve_window.cpp">
+    <ClCompile Include="ve_device.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -41,10 +41,10 @@
     <ClInclude Include="ve_pipeline.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ve_engine_device.h">
+    <ClInclude Include="ve_window.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ve_window.h">
+    <ClInclude Include="ve_device.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -161,14 +161,14 @@
   <ItemGroup>
     <ClCompile Include="first_app.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="ve_engine_device.cpp" />
+    <ClCompile Include="ve_device.cpp" />
     <ClCompile Include="ve_pipeline.cpp" />
     <ClCompile Include="vulkantest.cpp" />
     <ClCompile Include="ve_window.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="first_app.h" />
-    <ClInclude Include="ve_engine_device.h" />
+    <ClInclude Include="ve_device.h" />
     <ClInclude Include="ve_pipeline.h" />
     <ClInclude Include="ve_window.h" />
   </ItemGroup>

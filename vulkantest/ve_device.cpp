@@ -1,5 +1,5 @@
 #pragma once
-#include "ve_engine_device.h"
+#include "ve_device.h"
 
 // std headers
 #include <cstring>
