@@ -3,7 +3,7 @@
 #include <GLFW/glfw3.h>
 #include <string>
 
-namespace VULKENG {
+namespace ke {
 	class ve_window
 	{
 	public:

@@ -7,7 +7,7 @@
 
 int main() {
 
-	VULKENG::first_app FA{};
+	ke::first_app FA{};
 	try {
 		FA.run();
 	}

@@ -3,7 +3,7 @@
 #include "ve_window.h"
 #include "ve_pipeline.h"
 
-namespace VULKENG {
+namespace ke {
 	class first_app
 	{
 	public:

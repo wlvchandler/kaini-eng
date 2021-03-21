@@ -1,8 +1,9 @@
 #pragma once
+#include "ve_engine_device.h"
 #include <string>
 #include <vector>
 
-namespace VULKENG {
+namespace ke {
 	class ve_pipeline
 	{
 	public:

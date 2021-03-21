@@ -6,7 +6,7 @@
 #include <string>
 #include <vector>
 
-namespace VULKENG {
+namespace ke {
 
     struct SwapChainSupportDetails {
         VkSurfaceCapabilitiesKHR capabilities;

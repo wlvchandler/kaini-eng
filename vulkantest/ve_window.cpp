@@ -1,7 +1,7 @@
 #include "ve_window.h"
 #include <stdexcept>
 
-namespace VULKENG {
+namespace ke {
 	ve_window::ve_window(const int w, const int h, const std::string& name) : width{ w }, height{ h }, windowName{ name } {
 		initWindow();
 	}

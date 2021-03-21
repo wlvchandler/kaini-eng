@@ -4,7 +4,7 @@
 #include <iostream>
 
 
-namespace VULKENG {
+namespace ke {
 
 	ve_pipeline::ve_pipeline(const std::string& fd_vert, const std::string& fd_frag) {
 		this->createGraphicsPipeline(fd_vert, fd_frag);

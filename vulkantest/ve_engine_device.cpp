@@ -7,7 +7,7 @@
 #include <set>
 #include <unordered_set>
 
-namespace VULKENG {
+namespace ke {
 
     // local callback functions
     static VKAPI_ATTR VkBool32 VKAPI_CALL debugCallback(
@@ -138,6 +138,7 @@ namespace VULKENG {
         std::cout << "physical device: " << properties.deviceName << std::endl;
     }
 
+    // what features of our physical device do we want to use
     void ve_engine_device::createLogicalDevice() {
         QueueFamilyIndices indices = findQueueFamilies(physicalDevice);
 
