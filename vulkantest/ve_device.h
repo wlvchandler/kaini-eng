@@ -22,7 +22,7 @@ namespace ke {
         bool isComplete() { return graphicsFamilyHasValue && presentFamilyHasValue; }
     };
 
-    class ve_engine_device {
+    class ve_device {
     public:
 #ifdef NDEBUG
         const bool enableValidationLayers = false;
@@ -30,14 +30,14 @@ namespace ke {
         const bool enableValidationLayers = true;
 #endif
 
-        ve_engine_device(ve_window& window);
-        ~ve_engine_device();
+        ve_device(ve_window& window);
+        ~ve_device();
 
         // Not copyable or movable
-        ve_engine_device(const ve_engine_device&) = delete;
-        void operator=(const ve_engine_device&) = delete;
-        ve_engine_device(ve_engine_device&&) = delete;
-        ve_engine_device& operator=(ve_engine_device&&) = delete;
+        ve_device(const ve_device&) = delete;
+        void operator=(const ve_device&) = delete;
+        ve_device(ve_device&&) = delete;
+        ve_device& operator=(ve_device&&) = delete;
 
         VkCommandPool getCommandPool() { return commandPool; }
         VkDevice device() { return device_; }

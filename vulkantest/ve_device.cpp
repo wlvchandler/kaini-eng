@@ -49,7 +49,7 @@ namespace ke {
     }
 
     // class member functions
-    ve_engine_device::ve_engine_device(ve_window& window) : window{ window } {
+    ve_device::ve_device(ve_window& window) : window{ window } {
         createInstance();
         setupDebugMessenger();
         createSurface();
@@ -58,7 +58,7 @@ namespace ke {
         createCommandPool();
     }
 
-    ve_engine_device::~ve_engine_device() {
+    ve_device::~ve_device() {
         vkDestroyCommandPool(device_, commandPool, nullptr);
         vkDestroyDevice(device_, nullptr);
 
@@ -71,7 +71,7 @@ namespace ke {
     }
 
     // our connection between the application and Vulkan
-    void ve_engine_device::createInstance() {
+    void ve_device::createInstance() {
         if (enableValidationLayers && !checkValidationLayerSupport()) {
             throw std::runtime_error("validation layers requested, but not available!");
         }
@@ -113,7 +113,7 @@ namespace ke {
     }
 
     // choose physical device our application will be using
-    void ve_engine_device::pickPhysicalDevice() {
+    void ve_device::pickPhysicalDevice() {
         uint32_t deviceCount = 0;
         vkEnumeratePhysicalDevices(instance, &deviceCount, nullptr);
         if (deviceCount == 0) {
@@ -139,7 +139,7 @@ namespace ke {
     }
 
     // what features of our physical device do we want to use
-    void ve_engine_device::createLogicalDevice() {
+    void ve_device::createLogicalDevice() {
         QueueFamilyIndices indices = findQueueFamilies(physicalDevice);
 
         std::vector<VkDeviceQueueCreateInfo> queueCreateInfos;
@@ -186,7 +186,7 @@ namespace ke {
         vkGetDeviceQueue(device_, indices.presentFamily, 0, &presentQueue_);
     }
 
-    void ve_engine_device::createCommandPool() {
+    void ve_device::createCommandPool() {
         QueueFamilyIndices queueFamilyIndices = findPhysicalQueueFamilies();
 
         VkCommandPoolCreateInfo poolInfo = {};
@@ -201,11 +201,11 @@ namespace ke {
     }
 
     // connection between window and vulkans ability to display results
-    void ve_engine_device::createSurface() { 
+    void ve_device::createSurface() { 
         window.createWindowSurface(instance, &surface_); 
     }
 
-    bool ve_engine_device::isDeviceSuitable(VkPhysicalDevice device) {
+    bool ve_device::isDeviceSuitable(VkPhysicalDevice device) {
         QueueFamilyIndices indices = findQueueFamilies(device);
 
         bool extensionsSupported = checkDeviceExtensionSupport(device);
@@ -223,7 +223,7 @@ namespace ke {
             supportedFeatures.samplerAnisotropy;
     }
 
-    void ve_engine_device::populateDebugMessengerCreateInfo(
+    void ve_device::populateDebugMessengerCreateInfo(
         VkDebugUtilsMessengerCreateInfoEXT& createInfo) {
         createInfo = {};
         createInfo.sType = VK_STRUCTURE_TYPE_DEBUG_UTILS_MESSENGER_CREATE_INFO_EXT;
@@ -238,7 +238,7 @@ namespace ke {
     }
 
     // set up debug error validation layer
-    void ve_engine_device::setupDebugMessenger() {   // RELNOTE: disable 
+    void ve_device::setupDebugMessenger() {   // RELNOTE: disable 
         if (!enableValidationLayers) return;
         VkDebugUtilsMessengerCreateInfoEXT createInfo;
         populateDebugMessengerCreateInfo(createInfo);
@@ -247,7 +247,7 @@ namespace ke {
         }
     }
 
-    bool ve_engine_device::checkValidationLayerSupport() {
+    bool ve_device::checkValidationLayerSupport() {
         uint32_t layerCount;
         vkEnumerateInstanceLayerProperties(&layerCount, nullptr);
 
@@ -272,7 +272,7 @@ namespace ke {
         return true;
     }
 
-    std::vector<const char*> ve_engine_device::getRequiredExtensions() {
+    std::vector<const char*> ve_device::getRequiredExtensions() {
         uint32_t glfwExtensionCount = 0;
         const char** glfwExtensions;
         glfwExtensions = glfwGetRequiredInstanceExtensions(&glfwExtensionCount);
@@ -286,7 +286,7 @@ namespace ke {
         return extensions;
     }
 
-    void ve_engine_device::hasGflwRequiredInstanceExtensions() {
+    void ve_device::hasGflwRequiredInstanceExtensions() {
         uint32_t extensionCount = 0;
         vkEnumerateInstanceExtensionProperties(nullptr, &extensionCount, nullptr);
         std::vector<VkExtensionProperties> extensions(extensionCount);
@@ -309,7 +309,7 @@ namespace ke {
         }
     }
 
-    bool ve_engine_device::checkDeviceExtensionSupport(VkPhysicalDevice device) {
+    bool ve_device::checkDeviceExtensionSupport(VkPhysicalDevice device) {
         uint32_t extensionCount;
         vkEnumerateDeviceExtensionProperties(device, nullptr, &extensionCount, nullptr);
 
@@ -329,7 +329,7 @@ namespace ke {
         return requiredExtensions.empty();
     }
 
-    QueueFamilyIndices ve_engine_device::findQueueFamilies(VkPhysicalDevice device) {
+    QueueFamilyIndices ve_device::findQueueFamilies(VkPhysicalDevice device) {
         QueueFamilyIndices indices;
 
         uint32_t queueFamilyCount = 0;
@@ -360,7 +360,7 @@ namespace ke {
         return indices;
     }
 
-    SwapChainSupportDetails ve_engine_device::querySwapChainSupport(VkPhysicalDevice device) {
+    SwapChainSupportDetails ve_device::querySwapChainSupport(VkPhysicalDevice device) {
         SwapChainSupportDetails details;
         vkGetPhysicalDeviceSurfaceCapabilitiesKHR(device, surface_, &details.capabilities);
 
@@ -386,7 +386,7 @@ namespace ke {
         return details;
     }
 
-    VkFormat ve_engine_device::findSupportedFormat(
+    VkFormat ve_device::findSupportedFormat(
         const std::vector<VkFormat>& candidates, VkImageTiling tiling, VkFormatFeatureFlags features) {
         for (VkFormat format : candidates) {
             VkFormatProperties props;
@@ -403,7 +403,7 @@ namespace ke {
         throw std::runtime_error("failed to find supported format!");
     }
 
-    uint32_t ve_engine_device::findMemoryType(uint32_t typeFilter, VkMemoryPropertyFlags properties) {
+    uint32_t ve_device::findMemoryType(uint32_t typeFilter, VkMemoryPropertyFlags properties) {
         VkPhysicalDeviceMemoryProperties memProperties;
         vkGetPhysicalDeviceMemoryProperties(physicalDevice, &memProperties);
         for (uint32_t i = 0; i < memProperties.memoryTypeCount; i++) {
@@ -416,7 +416,7 @@ namespace ke {
         throw std::runtime_error("failed to find suitable memory type!");
     }
 
-    void ve_engine_device::createBuffer(
+    void ve_device::createBuffer(
         VkDeviceSize size,
         VkBufferUsageFlags usage,
         VkMemoryPropertyFlags properties,
@@ -447,7 +447,7 @@ namespace ke {
         vkBindBufferMemory(device_, buffer, bufferMemory, 0);
     }
 
-    VkCommandBuffer ve_engine_device::beginSingleTimeCommands() {
+    VkCommandBuffer ve_device::beginSingleTimeCommands() {
         VkCommandBufferAllocateInfo allocInfo{};
         allocInfo.sType = VK_STRUCTURE_TYPE_COMMAND_BUFFER_ALLOCATE_INFO;
         allocInfo.level = VK_COMMAND_BUFFER_LEVEL_PRIMARY;
@@ -465,7 +465,7 @@ namespace ke {
         return commandBuffer;
     }
 
-    void ve_engine_device::endSingleTimeCommands(VkCommandBuffer commandBuffer) {
+    void ve_device::endSingleTimeCommands(VkCommandBuffer commandBuffer) {
         vkEndCommandBuffer(commandBuffer);
 
         VkSubmitInfo submitInfo{};
@@ -479,7 +479,7 @@ namespace ke {
         vkFreeCommandBuffers(device_, commandPool, 1, &commandBuffer);
     }
 
-    void ve_engine_device::copyBuffer(VkBuffer srcBuffer, VkBuffer dstBuffer, VkDeviceSize size) {
+    void ve_device::copyBuffer(VkBuffer srcBuffer, VkBuffer dstBuffer, VkDeviceSize size) {
         VkCommandBuffer commandBuffer = beginSingleTimeCommands();
 
         VkBufferCopy copyRegion{};
@@ -491,7 +491,7 @@ namespace ke {
         endSingleTimeCommands(commandBuffer);
     }
 
-    void ve_engine_device::copyBufferToImage(
+    void ve_device::copyBufferToImage(
         VkBuffer buffer, VkImage image, uint32_t width, uint32_t height, uint32_t layerCount) {
         VkCommandBuffer commandBuffer = beginSingleTimeCommands();
 
@@ -518,7 +518,7 @@ namespace ke {
         endSingleTimeCommands(commandBuffer);
     }
 
-    void ve_engine_device::createImageWithInfo(
+    void ve_device::createImageWithInfo(
         const VkImageCreateInfo& imageInfo,
         VkMemoryPropertyFlags properties,
         VkImage& image,

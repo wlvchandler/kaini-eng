@@ -3,7 +3,7 @@
 
 namespace ke {
 	void first_app::run() {
-		while (!this->vulkWind.shouldClose()) {
+		while (!this->veWindow.shouldClose()) {
 			glfwPollEvents();
 		}
 	}
