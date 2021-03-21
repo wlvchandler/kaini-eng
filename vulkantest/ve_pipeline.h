@@ -15,7 +15,7 @@ namespace ke {
 		VkPipelineColorBlendAttachmentState colorBlendAttachment;
 		VkPipelineColorBlendStateCreateInfo colorBlendInfo;
 		VkPipelineDepthStencilStateCreateInfo depthStencilInfo;
-		VkPipelineLayout pipelineLayour = nullptr;
+		VkPipelineLayout pipelineLayout = nullptr;
 		VkRenderPass renderPass = nullptr;
 		uint32_t subpass = 0;
 	};
@@ -24,7 +24,7 @@ namespace ke {
 	{
 	public:
 		ve_pipeline(ve_device&, const pipeline_config&, const std::string&, const std::string&);
-		~ve_pipeline() {};
+		~ve_pipeline();
 
 		ve_pipeline(const ve_pipeline&) = delete;
 		void operator=(const ve_pipeline&) = delete;
@@ -36,7 +36,11 @@ namespace ke {
 		void createGraphicsPipeline(const std::string& fd_vert, const std::string& fd_frag, const pipeline_config&);
 		void createShaderModule(const std::vector<char>& code, VkShaderModule* shaderModule);
 
-		ve_device& vedevice; // memory unsafe -- be careful
+		static inline void createInputAssemblyStep(pipeline_config&, uint32_t, uint32_t);
+		static inline void createRasterizationStep(pipeline_config&);
+		static inline void createColorBlendStep(pipeline_config&);
+
+		ve_device& vedevice; // possibly memory unsafe -- be careful
 		VkPipeline graphicsPipeline;
 		VkShaderModule vertexShaderModule;
 		VkShaderModule fragmentShaderModule;
