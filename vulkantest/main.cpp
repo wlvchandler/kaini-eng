@@ -1,4 +1,4 @@
-#include "first_app.h"
+#include "test_app.h"
 #include "ve_pipeline.h"
 
 #include <iostream>
@@ -7,7 +7,7 @@
 
 int main() {
 
-	ke::first_app FA{};
+	ke::test_app FA{};
 	try {
 		FA.run();
 	}

@@ -159,7 +159,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="first_app.cpp" />
+    <ClCompile Include="test_app.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="ve_device.cpp" />
     <ClCompile Include="ve_pipeline.cpp" />
@@ -168,7 +168,7 @@
     <ClCompile Include="ve_window.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="first_app.h" />
+    <ClInclude Include="test_app.h" />
     <ClInclude Include="ve_device.h" />
     <ClInclude Include="ve_pipeline.h" />
     <ClInclude Include="ve_swapchain.h" />
