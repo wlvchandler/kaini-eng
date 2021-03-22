@@ -200,4 +200,8 @@ namespace ke {
 
 		return configInfo;
 	}
+
+	void ve_pipeline::bind(VkCommandBuffer commandBuffer) {
+		vkCmdBindPipeline(commandBuffer, VK_PIPELINE_BIND_POINT_GRAPHICS, graphicsPipeline);
+	}
 }

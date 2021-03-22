@@ -28,6 +28,7 @@ namespace ke {
 		ve_pipeline(const ve_pipeline&) = delete;
 		void operator=(const ve_pipeline&) = delete;
 
+		void bind(VkCommandBuffer commandBuffer);
 		static pipeline_config defaultPipelineConfig(uint32_t width, uint32_t height);
 
 	private:
