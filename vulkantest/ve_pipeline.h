@@ -8,7 +8,6 @@ namespace ke {
 	struct pipeline_config {
 		VkViewport viewport;
 		VkRect2D scissor;
-		VkPipelineViewportStateCreateInfo viewportInfo;
 		VkPipelineInputAssemblyStateCreateInfo inputAssemblyInfo;
 		VkPipelineRasterizationStateCreateInfo rasterInfo;
 		VkPipelineMultisampleStateCreateInfo multisampleInfo;

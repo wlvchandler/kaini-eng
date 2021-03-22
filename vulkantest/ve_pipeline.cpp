@@ -68,6 +68,13 @@ namespace ke {
 		vertexInputInfo.pVertexAttributeDescriptions = nullptr;
 		vertexInputInfo.pVertexBindingDescriptions = nullptr;
 
+		VkPipelineViewportStateCreateInfo viewportInfo{};
+		viewportInfo.sType = VK_STRUCTURE_TYPE_PIPELINE_VIEWPORT_STATE_CREATE_INFO;
+		viewportInfo.viewportCount = 1;
+		viewportInfo.pViewports = &info.viewport;
+		viewportInfo.scissorCount = 1;
+		viewportInfo.pScissors = &info.scissor;
+
 		VkGraphicsPipelineCreateInfo pipelineInfo{};
 		pipelineInfo.sType = VK_STRUCTURE_TYPE_GRAPHICS_PIPELINE_CREATE_INFO;
 		pipelineInfo.stageCount = 2;
@@ -78,7 +85,7 @@ namespace ke {
 		pipelineInfo.pColorBlendState	 = &info.colorBlendInfo;
 		pipelineInfo.pMultisampleState	 = &info.multisampleInfo;
 		pipelineInfo.pDepthStencilState  = &info.depthStencilInfo;
-		pipelineInfo.pViewportState		 = &info.viewportInfo;
+		pipelineInfo.pViewportState		 = &viewportInfo;
 		pipelineInfo.pDynamicState		 = nullptr;
 		pipelineInfo.layout				 = info.pipelineLayout;
 		pipelineInfo.renderPass			 = info.renderPass;
@@ -89,7 +96,6 @@ namespace ke {
 		if (vkCreateGraphicsPipelines(vedevice.device(), VK_NULL_HANDLE, 1, &pipelineInfo, nullptr, &graphicsPipeline) != VK_SUCCESS) {
 			throw std::runtime_error("failed to create graphics pipeline");
 		}
-
 	}
 
 	void ve_pipeline::createShaderModule(const std::vector<char>& code, VkShaderModule* shaderModule)
@@ -124,12 +130,6 @@ namespace ke {
 		// discard pixels outside of this rectangle
 		configInfo.scissor.offset = { 0, 0 };
 		configInfo.scissor.extent = { width, height };
-
-		configInfo.viewportInfo.sType = VK_STRUCTURE_TYPE_PIPELINE_VIEWPORT_STATE_CREATE_INFO;
-		configInfo.viewportInfo.viewportCount = 1;
-		configInfo.viewportInfo.pViewports = &configInfo.viewport;
-		configInfo.viewportInfo.scissorCount = 1;
-		configInfo.viewportInfo.pScissors = &configInfo.scissor;
 	}
 
 	// State 2) Rasterization -- break up geometry into fragments for where each pixel the triangle overlaps
