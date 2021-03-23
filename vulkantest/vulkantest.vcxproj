@@ -165,7 +165,6 @@
     <ClCompile Include="ve_model.cpp" />
     <ClCompile Include="ve_pipeline.cpp" />
     <ClCompile Include="ve_swapchain.cpp" />
-    <ClCompile Include="vulkantest.cpp" />
     <ClCompile Include="ve_window.cpp" />
   </ItemGroup>
   <ItemGroup>
