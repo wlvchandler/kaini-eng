@@ -36,6 +36,9 @@
     <ClCompile Include="test_app.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="ve_model.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ve_pipeline.h">
@@ -51,6 +54,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="test_app.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ve_model.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

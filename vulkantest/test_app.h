@@ -1,6 +1,7 @@
 #pragma once
 
 #include "ve_window.h"
+#include "ve_model.h"
 #include "ve_pipeline.h"
 #include "ve_device.h"
 #include "ve_swapchain.h"
@@ -24,6 +25,7 @@ namespace ke {
 
 		void run();
 	private:
+		void loadModels();
 		void createPipelineLayout();
 		void createPipeline();
 		void createCommandBuffers();
@@ -36,6 +38,7 @@ namespace ke {
 		std::unique_ptr<ve_pipeline> vePipeline;
 		VkPipelineLayout pipeline_layout;
 		std::vector<VkCommandBuffer> commandBuffers;
+		std::unique_ptr<ve_model> veModel;
 	};
 }
 

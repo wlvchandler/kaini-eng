@@ -6,6 +6,7 @@
 namespace ke {
 
 	test_app::test_app() {
+		loadModels();
 		createPipelineLayout();
 		createPipeline();
 		createCommandBuffers();
@@ -81,7 +82,8 @@ namespace ke {
 			vkCmdBeginRenderPass(commandBuffers[i], &renderPassInfo, VK_SUBPASS_CONTENTS_INLINE);
 			
 			vePipeline->bind(commandBuffers[i]);
-			vkCmdDraw(commandBuffers[i], 3, 1, 0, 0);
+			veModel->bind(commandBuffers[i]);
+			veModel->draw(commandBuffers[i]);
 
 			vkCmdEndRenderPass(commandBuffers[i]);
 			if (vkEndCommandBuffer(commandBuffers[i]) != VK_SUCCESS) {
@@ -103,5 +105,28 @@ namespace ke {
 		if (result != VK_SUCCESS) {
 			throw std::runtime_error("failed to present swap chain image");
 		}
+	}
+
+
+	void test_app::loadModels() {
+		std::vector<ve_model::Vertex> vertices{
+			{{-0.8f,-0.8f}}, {{-0.8f,0.8f}},  {{-0.6f,0.8f}},
+			{{-0.8f,-0.8f}}, {{-0.6f,-0.8f}}, {{-0.6f,0.8f}},
+			{{-0.2f,-0.8f}}, {{-0.2f,0.8f}},  {{0.0f,0.8f}},
+			{{-0.2f,-0.8f}}, {{0.0f,-0.8f}},  {{0.0f,0.8f}},
+			{{0.4f,-0.8f}},  {{0.4f,0.8f}},   {{0.6f,0.8f}},
+			{{0.4f,-0.8f}},  {{0.6f,-0.8f}},  {{0.6f,0.8f}},
+			{{-0.6f,-0.1f}}, {{-0.6f,0.1f}},  {{-0.2f,0.1f}},
+			{{-0.6f,-0.1f}}, {{-0.2f,-0.1f}}, {{-0.2f,0.1f}}
+			//{{-0.8f,-0.8f}}, {{-0.6f,-0.8f}}, {{-0.6f,0.8f}},
+			//{{0.0f, -0.5f}},
+			//{{0.5f, 0.5f}},
+			//{{-0.5f, 0.5f}},
+			//{{1.0f, -0.1f}},
+			//{{0.1f, 0.3f}},
+			//{{-0.5f, 0.4f}}
+		};
+
+		veModel = std::make_unique<ve_model>(veDevice, vertices);
 	}
 }

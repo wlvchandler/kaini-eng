@@ -1,5 +1,6 @@
 #pragma once
 #include "ve_device.h"
+#include "ve_model.h"
 #include <string>
 #include <vector>
 
